@@ -7,7 +7,6 @@
     - name: Retrieve VNet information
       azure.azcollection.azure_rm_virtualnetwork_info:
       register: vnet_info
-      delegate_to: localhost
 
     - name: Retrieve Network Interface information
       azure.azcollection.azure_rm_networkinterface_info:
@@ -25,4 +24,5 @@
           delegate_to: rhel8-1
           run_once: true
           become: true
+          connection: ssh
 ...
