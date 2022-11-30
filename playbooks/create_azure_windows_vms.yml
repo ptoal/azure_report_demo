@@ -6,7 +6,7 @@
 
   tasks:
     - name: Create VMs
-      ansible.builtin.import_role:
+      ansible.builtin.include_role:
         name: ptoal.cloud_demo.vm
         tasks_from: create_win_vm.yml
         apply:
