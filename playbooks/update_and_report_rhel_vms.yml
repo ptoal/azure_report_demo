@@ -1,6 +1,6 @@
 ---
 - name: Update RHEL Servers
-  hosts: rhel
+  hosts: linux
   become: true
   tasks:
 
