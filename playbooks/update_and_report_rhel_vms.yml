@@ -8,6 +8,7 @@
     ansible.builtin.yum:
       name: '*'
       state: latest
+      update_only: true
     when: ansible_pkg_mgr == "yum"
     register: patchingresult
 
@@ -15,6 +16,7 @@
     ansible.builtin.dnf:
       name: '*'
       state: latest
+      update_only: true
     when: ansible_pkg_mgr == "dnf"
     register: patchingresultdnf
 
