@@ -16,10 +16,11 @@
         azure_sub_id: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
         azure_client: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
 
+- name: Build the Report Server
+  hosts: rhel8-1
+  become: true
+  tasks:
     - name: Build the report
       ansible.builtin.include_role:
         name: shadowman.reports.build_report_cloud
-        apply:
-          delegate_to: rhel8-1
-          run_once: true
 ...
