@@ -12,12 +12,16 @@
       azure.azcollection.azure_rm_networkinterface_info:
       register: interface_info
 
+    - name: Get Azure VM Info
+      azure.azcollection.azure_rm_virtualmachine_info:
+      register: azure_info
+
     - name: Set Azure information
       ansible.builtin.set_fact:
         azure_sub_id: "{{ lookup('ansible.builtin.env', 'AZURE_SUBSCRIPTION_ID') }}"
         azure_client: "{{ lookup('ansible.builtin.env', 'AZURE_CLIENT_ID') }}"
 
-    - name: Build the report
+    - name: Build the Azure report
       ansible.builtin.include_role:
         name: shadowman.reports.build_report_cloud
         apply:
@@ -25,4 +29,57 @@
           run_once: true
           become: true
           connection: ssh
+
+    - name: Build the report
+      ansible.builtin.include_role:
+        name: shadowman.reports.build_report_tags
+        apply:
+          delegate_to: rhel8-1
+          run_once: true
+
+- name: Create Linux Report
+  hosts: rhel
+  tasks:
+
+    - name: Scan packages (Unix/Linux)
+      ansible.builtin.package_facts:
+      register: result
+      when: ansible_os_family != "Windows"
+
+    - name: Organize results for loopings
+      ansible.builtin.set_fact:
+        packagefacts: "{{ result.ansible_facts.packages | dict2items }}"
+        cacheable: true
+      when: ansible_os_family != "Windows"
+
+    - name: Scan services (Unix/Linux)
+      ansible.builtin.service_facts:
+      when: ansible_os_family != "Windows"
+
+    - name: Build the report
+      ansible.builtin.include_role:
+        name: shadowman.reports.build_report_linux
+        apply:
+          delegate_to: rhel8-1
+          run_once: true
+
+- name: Create Windows Report
+  hosts: windows
+  tasks:
+
+    - name: "Scan packages (Windows)"
+      shadowman.reports.win_scan_packages:
+      when: ansible_os_family == "Windows"
+
+    - name: "Scan services (Windows)"
+      shadowman.reports.win_scan_services:
+      when: ansible_os_family == "Windows"
+
+    - name: Build the report
+      ansible.builtin.include_role:
+        name: shadowman.reports.build_report_windows
+        apply:
+          delegate_to: rhel8-1
+          run_once: true
+
 ...
