@@ -1,0 +1,27 @@
+- name: Create Linux Report
+  hosts: rhel
+  tasks:
+
+    - name: Scan packages (Unix/Linux)
+      ansible.builtin.package_facts:
+      register: result
+      when: ansible_os_family != "Windows"
+
+    - name: Organize results for loopings
+      ansible.builtin.set_fact:
+        packagefacts: "{{ result.ansible_facts.packages | dict2items }}"
+        cacheable: true
+      when: ansible_os_family != "Windows"
+
+    - name: Scan services (Unix/Linux)
+      ansible.builtin.service_facts:
+      when: ansible_os_family != "Windows"
+
+    - name: Build the report
+      ansible.builtin.include_role:
+        name: shadowman.reports.build_report_linux
+        apply:
+          delegate_to: rhel8-1
+          run_once: true
+          become: true
+          connection: ssh
