@@ -13,9 +13,9 @@ win2k22-3
 win2k22-4
 
 [windows:vars]
-ansible_connection: winrm
-ansible_winrm_transport: ntlm
-ansible_winrm_server_cert_validation: ignore
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
