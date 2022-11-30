@@ -4,8 +4,10 @@
 
   - name: Install Windows Updates
     ansible.windows.win_updates:
-      category_names: '*'
+      category_names: 'CriticalUpdates'
       reboot: true
+    async: 1200
+    poll: 10
     register: patchresult
 
   - name: Build the report
