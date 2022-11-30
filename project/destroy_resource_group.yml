@@ -6,7 +6,7 @@
   tasks:
     - name: Destroy resource group
       azure.azcollection.azure_rm_resourcegroup:
-        name: "{{ resource_group_name }}"
-        location: "{{ region }}"
+        name: "{{ cloud_demo_azure_resource_group_name }}"
+        location: "{{ cloud_demo_azure_region }}"
         state: absent
         force_delete_nonempty: true

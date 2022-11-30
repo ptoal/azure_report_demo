@@ -1,0 +1,8 @@
+---
+collections:
+  - name: shadowman.reports
+    source: git+https://github.com/ptoal/shadowman.reports.git
+    type: git
+  - name: ptoal.cloud_demo
+    source: git+https://github.com/ptoal/cloud_demo_collection.git
+    type: git
