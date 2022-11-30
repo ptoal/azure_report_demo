@@ -9,3 +9,7 @@
       ansible.builtin.import_role:
         name: ptoal.cloud_demo.vm
         tasks_from: create_win_vm.yml
+        apply:
+          delegate_to: rhel8-1
+          run_once: true
+          become: true
