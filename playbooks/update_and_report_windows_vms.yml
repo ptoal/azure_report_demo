@@ -1,6 +1,5 @@
 - name: Patch Windows Hosts
   hosts: windows
-  become: true
   tasks:
 
   - name: Install Windows Updates
@@ -15,3 +14,4 @@
       apply:
         delegate_to: rhel8-1
         run_once: true
+        become: true
