@@ -12,6 +12,10 @@ win2k22-2
 win2k22-3
 win2k22-4
 
+[windows:vars]
+ansible_connection: winrm
+ansible_winrm_transport: ntlm
+
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=azureuser
