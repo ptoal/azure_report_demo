@@ -36,6 +36,8 @@
         apply:
           delegate_to: rhel8-1
           run_once: true
+          become: true
+          connection: ssh
 
 - name: Create Linux Report
   hosts: rhel
@@ -62,6 +64,8 @@
         apply:
           delegate_to: rhel8-1
           run_once: true
+          become: true
+          connection: ssh
 
 - name: Create Windows Report
   hosts: windows
@@ -81,5 +85,7 @@
         apply:
           delegate_to: rhel8-1
           run_once: true
+          become: true
+          connection: ssh
 
 ...
