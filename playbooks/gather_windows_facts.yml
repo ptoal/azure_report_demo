@@ -1,4 +1,4 @@
 ---
 - name: Gather facts
-  hosts: all
+  hosts: windows
   gather_facts: true

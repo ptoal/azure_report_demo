@@ -1,0 +1,4 @@
+---
+- name: Gather facts
+  hosts: rhel
+  gather_facts: true
