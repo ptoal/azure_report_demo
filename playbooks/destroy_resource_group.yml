@@ -9,3 +9,5 @@
       ansible.builtin.import_role:
         name: ptoal.cloud_demo.azure_resources
         tasks_from: destroy.yml
+      async: 3600
+      poll: 10
