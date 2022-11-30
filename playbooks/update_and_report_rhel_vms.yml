@@ -1,0 +1,26 @@
+---
+- name: Update RHEL Servers
+  hosts: rhel
+  become: true
+  tasks:
+
+  - name: Upgrade all packages (yum)
+    ansible.builtin.yum:
+      name: '*'
+      state: latest
+    when: ansible_pkg_mgr == "yum"
+    register: patchingresult
+
+  - name: Upgrade all packages (dnf)
+    ansible.builtin.dnf:
+      name: '*'
+      state: latest
+    when: ansible_pkg_mgr == "dnf"
+    register: patchingresultdnf
+
+  - name: Build the report
+    ansible.builtin.include_role:
+      name: shadowman.reports.build_report_linux_patch
+      apply:
+        delegate_to: rhel8-1
+        run_once: true

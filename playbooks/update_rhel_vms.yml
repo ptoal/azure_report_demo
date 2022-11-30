@@ -1,9 +1,0 @@
----
-- name: Update Azure RHEL VMs with desired packages
-  hosts: rhel
-  tasks:
-    - name: Update installed packages
-      ansible.builtin.dnf:
-        name: "*"
-        state: latest
-        update_only: true
