@@ -1,0 +1,11 @@
+---
+- name: Create Azure Windows VMs
+  hosts: windows
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Create VMs
+      ansible.builtin.import_role:
+        name: ptoal.cloud_demo.vm
+        tasks_from: create_win_vm.yml

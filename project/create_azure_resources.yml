@@ -1,11 +1,10 @@
 ---
-- name: Create Common Azure Resources
+- name: Create Azure Resources
   hosts: localhost
   connection: local
   gather_facts: false
-
   tasks:
     - name: Azure Resources created
       ansible.builtin.import_role:
         name: ptoal.cloud_demo.azure_resources
-        tasks_from: destroy.yml
+        tasks_from: create.yml

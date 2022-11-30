@@ -1,8 +1,16 @@
 localhost   ansible_connection=local
 
 [rhel]
-rhel8-ansible1
-rhel8-ansible2
+rhel8-1
+rhel8-2
+rhel8-3
+rhel8-4
+
+[windows]
+win2k22-1
+win2k22-2
+win2k22-3
+win2k22-4
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
