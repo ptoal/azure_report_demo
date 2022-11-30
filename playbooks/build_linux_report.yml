@@ -1,5 +1,5 @@
 - name: Create Linux Report
-  hosts: rhel
+  hosts: linux
   tasks:
 
     - name: Scan packages (Unix/Linux)
